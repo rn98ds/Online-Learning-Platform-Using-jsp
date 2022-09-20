@@ -15,24 +15,29 @@
    String email= request.getParameter("email");
    String pass= request.getParameter("pass");
    try{
-    UserDao db= new UserDao();
-    User u=new User(name,email,pass);
-   int a= db.insert(u);
-   if(a>0)
-   {
-	   out.print("Data Inserted");   
-   }
-   else
-   {
-	   out.print("Data Not inserted");
-   }
-   }
-   catch (Exception e)
-   {
-	   e.printStackTrace();
-   }
-   
-  
+	
+	   UserDao db=new UserDao();
+	   if(db.checkEmail(email))
+	   {
+		   request.getRequestDispatcher("index.jsp").include(request, response);
+	   	out.print("<script>alert('Email Already Registor')</script>");
+	   }
+	   else{
+	   User u=new User(name,email,pass);
+	   int a= db.insert(u);
+	   if(a>0)
+	   {
+	   	out.print("data inserted");
+	   }
+	   else
+	   {
+	   	out.print("data not inserted");
+	   }
+	   }
+	   } 
+	   catch (Exception e) {
+	   	e.printStackTrace();
+	   }
 %>
  <!-- To do no same registration
        css padding thik karna hai -->

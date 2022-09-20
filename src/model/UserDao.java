@@ -37,7 +37,6 @@ public class UserDao
 	   }
       public boolean checkUser(String email,String pass) throws ClassNotFoundException,SQLException
       {
-    	  //int status=0;
 		   con=getConnection();
 		   PreparedStatement ps=con.prepareStatement("SELECT * FROM user WHERE email=? and password=?");
 		   ps.setString(1, email);
@@ -45,4 +44,27 @@ public class UserDao
 		     ResultSet rs=ps.executeQuery();
     	  return rs.absolute(1);
       }
+     /* public boolean checkEmail(String email) throws ClassNotFoundException,SQLException
+      {
+    	  //int status=0;
+		   con=getConnection();
+		   PreparedStatement ps=con.prepareStatement("SELECT * FROM user WHERE email=?");
+		   ps.setString(1, email);
+		     ResultSet rs=ps.executeQuery();
+    	  return rs.absolute(1);
+      }*/
+      public boolean checkEmail(String email) throws ClassNotFoundException, SQLException
+  	{
+  		String sql = "select * from user where email=?";
+  		con=getConnection();
+  		PreparedStatement ps = con.prepareStatement(sql);
+  		ps.setString(1, email);		
+
+  		ResultSet rs = ps.executeQuery();
+  		boolean a=rs.absolute(1);
+  		con.close();
+  	
+  		return a;
+  	}
 }
+
