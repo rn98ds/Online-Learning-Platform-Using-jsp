@@ -10,29 +10,31 @@
 </head>
 <body>
 <%
-   String email= request.getParameter("uname");
-   String pass= request.getParameter("upass");
-   try{
-    UserDao db= new UserDao();
-    
-   boolean a= db.checkUser(email, pass);
-   if(a)
-   {
-	   out.print("Welcome User  " +email);   
-   }
-   else
-   {
-	   request.getRequestDispatcher("login.jsp").include(request, response);
-	   	out.print("<script>alert('Something Went Wrong, Wrong username or password')</script>");
-	  // out.print("Something Went Wrong, Wrong username or password");
-   }
-   }
-   catch (Exception e)
-   {
-	   e.printStackTrace();
-   }
- %>  
+String email=request.getParameter("uname");
+String pass=request.getParameter("upass");
+
+	try{
+		UserDao db=new UserDao();
+		boolean a= db.checkUser(email,pass);
+		if(a)
+		{
+			//adding user name and pass in session object
+			session.setAttribute( "email", email);
+			session.setAttribute( "pass", pass);
+			//end session
+			response.sendRedirect("profile.jsp");
+		//	out.print("Welcome User : "+email); //we are adding profile/dashboard 
+		}
+		else
+		{
+			out.print("<script>alert('Wrong username and password') </script>");
+			request.getRequestDispatcher("login.jsp").include(request, response);
+		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+%>  
 
 </body>
 </html>
-<!-- add pop-up notification -->
+<!-- add pop-up notification done -->
