@@ -22,7 +22,9 @@
    }
    else
    {
-	   out.print("Something Went Wrong, Wrong username or password");
+	   request.getRequestDispatcher("login.jsp").include(request, response);
+	   	out.print("<script>alert('Something Went Wrong, Wrong username or password')</script>");
+	  // out.print("Something Went Wrong, Wrong username or password");
    }
    }
    catch (Exception e)
@@ -33,3 +35,4 @@
 
 </body>
 </html>
+<!-- add pop-up notification -->
