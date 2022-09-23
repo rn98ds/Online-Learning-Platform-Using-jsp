@@ -7,7 +7,20 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%
+if(session.getAttribute("email")!=null)
+{
+%>
 Welcome to profile
+<%
+}
+else
+{
+	out.print("<script>alert('Please Login First') </script>");
+	request.getRequestDispatcher("login.jsp").include(request, response);
+
+}
+%>
 <br>
  <a href="logout.jsp"><input type="submit" value="logout"></a>
 </body>
