@@ -66,5 +66,18 @@ public class UserDao
   	
   		return a;
   	}
+      public int studentCount() throws ClassNotFoundException, SQLException
+    	{
+    		String sql = "select count(*) from user";
+    		con=getConnection();
+    		PreparedStatement ps = con.prepareStatement(sql);
+    		ResultSet rs = ps.executeQuery();
+    		rs.next();
+    		int count =rs.getInt(1);
+    		con.close();
+    	
+    		return count;
+    	}
+
 }
 

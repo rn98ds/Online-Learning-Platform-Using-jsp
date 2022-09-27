@@ -19,8 +19,7 @@
 </head>
 <body>
 <%
-if(session.getAttribute("email")==null)
-	
+if(session.getAttribute("email")==null)	
 {
 %>
 <%@include file="navbar.html" %>
