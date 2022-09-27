@@ -1,3 +1,5 @@
+<%@page import="model.User"%>
+<%@page import="java.util.List"%>
 <%@page import="model.UserDao"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -502,16 +504,37 @@
                         <table id="example" class="display expandable-table" style="width:100%">
                           <thead>
                             <tr>
-                              <th>Quote#</th>
-                              <th>Product</th>
-                              <th>Business type</th>
-                              <th>Policy holder</th>
+                              <th>UserId#</th>
+                              <th>Name</th>
+                              <th>Email</th>
+                              <th>Password</th>
                               <th>Premium</th>
                               <th>Status</th>
                               <th>Updated at</th>
                               <th></th>
                             </tr>
                           </thead>
+                          <%
+                         List<User> uls= new UserDao().getAllUser();
+                          for(User u:uls)
+                          {
+                          %>
+                          
+                          
+                          <tr>
+                              <td><%=u.getUid() %></td>
+                              <td><%=u.getName() %></td>
+                              <td><%=u.getEmail() %></td>
+                              <td><%=u.getPassword() %></td>
+                              <td>Premium</td>
+                              <td>Status</td>
+                              <td>Updated at</td>
+                              <td></td>
+                            </tr>
+                          <%
+                          }
+                          %>  
+                          
                       </table>
                       </div>
                     </div>
