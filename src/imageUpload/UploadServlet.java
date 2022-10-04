@@ -15,11 +15,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import model.Course;
+import model.CourseDao;
+
 @MultipartConfig
 @WebServlet("/UploadServlet")
 public class UploadServlet extends HttpServlet 
 {
-
+	 String fileName=null;
 	
   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
@@ -28,7 +31,7 @@ public class UploadServlet extends HttpServlet
           //fetch form data
           
           Part part = request.getPart("file");
-          String fileName =getInitParameter(part);
+          fileName=getInitParameter(part);
           
           
           String path = getServletContext().getRealPath("/files/"+fileName);
@@ -80,8 +83,33 @@ public class UploadServlet extends HttpServlet
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException
-  {
+  { 
+	  PrintWriter out=response.getWriter();
       processRequest(request, response);
+      System.out.println("hello world "+fileName);
+      String coursetitle=request.getParameter("coursetitle");
+      String instructor=request.getParameter("instructor");
+      String category=request.getParameter("category");
+      String totalenroll=request.getParameter("totalenroll");
+      String fees=request.getParameter("fees");
+    //  String imgurl=request.getParameter("imgurl");
+      try
+      {
+      	CourseDao cd=new CourseDao();
+      	Course c=new Course(coursetitle,instructor,category,totalenroll,fees,fileName);
+      	int a=cd.insert(c);
+      	if(a>0)
+      	{
+      		out.print("data inserted");
+      	}
+      	else
+      	{
+      		out.print("data not inserted");
+      	}
+      }
+      catch (Exception e) {
+         	e.printStackTrace();
+         }
   }
 
   // </editor-fold>
