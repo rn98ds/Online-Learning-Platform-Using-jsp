@@ -19,7 +19,7 @@
 	   UserDao db=new UserDao();
 	   if(db.checkEmail(email))
 	   {
-		   request.getRequestDispatcher("index.jsp").include(request, response);
+		   request.getRequestDispatcher("adminpanel.jsp").include(request, response);
 	   	out.print("<script>alert('Email Already Registor')</script>");
 	   }
 	   else{

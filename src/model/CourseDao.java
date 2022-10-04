@@ -36,6 +36,24 @@ public class CourseDao
 	
 		return count;
 	}
+	public  int insert(Course c) throws ClassNotFoundException,SQLException
+	   {
+		
+		   int status=0;
+		   con=getConnection();
+		   PreparedStatement ps=con.prepareStatement("INSERT INTO course(coursetitle,instructor,"
+		   		+ "category,totalenroll,fees,imgurl)"
+		   		+ "VALUES(?,?,?,?,?,?)");
+		   ps.setString(1, c.getCoursetitle());
+		   ps.setString(2, c.getInstructor());
+		   ps.setString(3, c.getCategory());
+		   ps.setString(4, c.getTotalenroll());
+		   ps.setString(5, c.getFees());
+		   ps.setString(6, c.getImgurl());
+		   status=ps.executeUpdate();
+		   return status;
+	   }
+ 
  
 	  	
 	    
