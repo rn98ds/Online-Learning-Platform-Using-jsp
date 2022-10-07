@@ -53,7 +53,25 @@ public class CourseDao
 		   status=ps.executeUpdate();
 		   return status;
 	   }
- 
+	 public Course getCourse(int cid) throws ClassNotFoundException, SQLException
+	  	{
+	  		String sql = "select * from course where cid="+cid;
+	  		con=getConnection();
+	  		PreparedStatement ps = con.prepareStatement(sql);
+	  		ResultSet rs = ps.executeQuery();
+	  		Course c=new Course();
+	  		if(rs.absolute(1))
+	  		{
+	  			c.setCoursetitle(rs.getString(2));
+	  			c.setInstructor(rs.getString(3));
+	  			c.setCategory(rs.getString(4));
+	  			c.setTotalenroll(rs.getString(5));
+	  			c.setFees(rs.getString(6));
+	  			c.setImgurl(rs.getString(7));
+	  		}
+	  		con.close();
+	  		return c;
+	  	}
  
 	  	
 	    
